@@ -46,7 +46,7 @@
 		var marker = L.marker([-23.4642335302915, -46.69311958029149]).addTo(mymap);
 		marker.bindPopup("my tooltip text").openTooltip();
 
-		var points = omnivore.csv("http://rimolive.github.io/mapa-crime-sp/data/test.csv").on('ready', function () {
+		var points = omnivore.csv("https://rimolive.github.io/mapa-crime-sp/data/test.csv").on('ready', function () {
 			points.eachLayer(eachLayer);
 		}).addTo(mymap);
 
