@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Quick Start - Leaflet</title>
+	<title>Mapa do crime na cidade de São Paulo</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
@@ -33,16 +33,20 @@
 
 		function eachLayer(layer) {
 			var feature = layer.toGeoJSON();
-			if (feature.properties && feature.properties.text) {
-				layer.bindPopup(feature.properties.text);
+			if (feature.properties && feature.properties.tipo) {
+				text  = feature.properties.tipo;
+				text += "\n";
+				text += "Data: " + feature.properties.data_ocorrencia;
+				text += "\n";
+				text += "Endereco: " + feature.properties.endereco;
+				layer.bindPopup(text);
 			}
 		}
 
 		var marker = L.marker([-23.4642335302915, -46.69311958029149]).addTo(mymap);
 		marker.bindPopup("my tooltip text").openTooltip();
 
-		// var points = omnivore.csv("file:///run/media/rmartine/TOSHIBA EXT/big-data-projects/ssp/database/2017/homicidio_2017_05_geo.csv").addTo(mymap);
-		var points = omnivore.csv("https://rimolive.github.io/mapa-crime-sp/data/test.csv").on('ready', function () {
+		var points = omnivore.csv("file:///run/media/rmartine/TOSHIBA EXT/big-data-projects/ssp/view/data/test_massa.csv").on('ready', function () {
 			points.eachLayer(eachLayer);
 		}).addTo(mymap);
 
