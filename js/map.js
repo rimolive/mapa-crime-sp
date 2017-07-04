@@ -3,6 +3,8 @@ var mymap = L.map('mapid', {
 	zoom: 10
 });
 
+var overlayMaps = {};
+
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 	maxZoom: 18,
 	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -19,8 +21,15 @@ function eachLayer(layer) {
 		text += "<p><strong>Endereco:</strong> " + feature.properties.endereco + "</p>";
 		layer.bindPopup(text);
 	}
+
+	if(overlayMaps.hasOwnProperty(feature.properties.tipo)){
+		overlayMaps[feature.properties.tipo].addLayer(layer);
+	}else{
+		overlayMaps[feature.properties.tipo] = L.layerGroup(layer);
+	}
 }
 
-var points = omnivore.csv("https://rimolive.github.io/mapa-crime-sp/data/test.csv").on('ready', function () {
-	points.eachLayer(eachLayer);
-}).addTo(mymap);
+var points = omnivore.csv("/mapa-crime-sp/data/test.csv").on('ready', function () {
+	points.eachLayer(eachLayer);-
+	L.control.layers(null,overlayMaps).addTo(mymap);
+});
