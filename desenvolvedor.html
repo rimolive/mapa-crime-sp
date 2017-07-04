@@ -1,0 +1,38 @@
+---
+layout: default
+title: Welcome to the rimolive community portal
+---
+<div class="container-fluid">
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-sm-4 col-xs-12"></div>
+			<div class="col-sm-10 col-xs-12">
+				<h1></h1>
+				<p class="lead">
+					Todos os dados foram extraídos do <a href="http://www.ssp.sp.gov.br/transparenciassp/">site da SSP</a>
+					com o intuito de oferecer à sociedade um meio para visualizar a criminalidade na cidade de São Paulo e
+					assim cobrar das autoridades competentes uma melhoria na segurança de uma determinada região.
+				</p>
+				<p class="lead">
+					Caso queira contribuir com o projeto, clique no link "Edit me on GitHub" no canto
+					superior direito da página e você será redirecionado para o repositório GitHub do
+					projeto. Os códigos para gerar os dados estão no diretório <code>/assets</code> e
+					a descrição deles você pode ver a sequir:
+				</p>
+			</div>
+		</div>
+		{% for script in site.scripts %}
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-1">
+				<h2>
+					<a href="./assets/{{ script.title }}">{{ script.title }}</a>
+					{% for label in script.labels %}
+						<span class="badge">{{ label }}</span>
+					{% endfor %}
+				</h2>
+				{{ script.content }}
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>

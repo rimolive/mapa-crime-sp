@@ -1,0 +1,10 @@
+{% for item in site.data.menu.mapacrimesp %}
+{% if page.menu_entry == item.title %}
+<li class="active">
+  <a href="#">{{ item.title }}</a>
+{% else %}
+<li>
+  <a href="{{ item.url }}">{{ item.title }}</a>
+{% endif %}
+</li>
+{% endfor %}

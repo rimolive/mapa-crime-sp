@@ -1,1 +1,27 @@
-theme: jekyll-theme-slate
+name: Aprendendo Cloud Computing
+description: A jekyll theme
+
+url: https://rimolive.github.io/mapa-crime-sp
+
+baseurl: /mapa-crime-sp
+
+github: 'rimolive/mapa-crime-sp'
+
+markdown: kramdown
+
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+
+collections:
+  faqs: {}
+  scripts: {}
+  applications:
+    output: true
+
+defaults:
+- scope:
+    path: ""
+  values:
+    menu_template: menu.html
+    menu_entry: Welcome

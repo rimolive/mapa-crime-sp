@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Mapa do crime na cidade de São Paulo</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+	 crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
+	 crossorigin=""></script>
+
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+	<!-- PatternFly -->
+	<link rel="stylesheet" href="./css/patternfly.min.css">
+	<link rel="stylesheet" href="./css/patternfly-additions.min.css">
+	<link rel="stylesheet" href="./css/mapa-crime-sp.css">
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-pf" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+			<a class="navbar-brand" href="/">
+				<img id="brand" src="/img/brand-radanalytics.svg" alt="">
+			</a>
+			<h1 class="navbar-text">
+				Mapa da criminalidade do Estado de SP
+			</h1>
+		</div>
+		<div class="collapse navbar-collapse navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-utility hidden-xs">
+				<li>
+					<a href="https://github.com/rimolive/mapa-crime-sp" target="blank">Edit me on GitHub</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-primary">
+				
+
+<li>
+  <a href="/">Mapa</a>
+
+</li>
+
+
+<li>
+  <a href="/desenvolvedor">Desenvolvedor</a>
+
+</li>
+
+
+<li>
+  <a href="/sobre">Sobre</a>
+
+</li>
+
+			</ul>
+		</div>
+	</nav>
+	<div class="container-fluid">
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-sm-4 col-xs-12"></div>
+			<div class="col-sm-10 col-xs-12">
+				<h1></h1>
+				<p class="lead">
+					http://www.ssp.sp.gov.br/transparenciassp/
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<!--<script src="./js/bootstrap.min.js"></script>-->
+	<!-- PatternFly -->
+	<script src="./js/patternfly.min.js"></script>
+
+</body>
+
+</html>
