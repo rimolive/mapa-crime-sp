@@ -29,7 +29,7 @@ function eachLayer(layer) {
 	}
 }
 
-var points = omnivore.csv("/mapa-crime-sp/data/test.csv").on('ready', function () {
+var points = omnivore.csv("/mapa-crime-sp/data/massa.csv").on('ready', function () {
 	points.eachLayer(eachLayer);-
 	L.control.layers(null,overlayMaps).addTo(mymap);
 });
