@@ -21,15 +21,27 @@ function eachLayer(layer) {
 		text += "<p><strong>Endereco:</strong> " + feature.properties.endereco + "</p>";
 		layer.bindPopup(text);
 	}
+	// Related doc: http://leafletjs.com/reference-1.1.0.html#icon
+	if(feature.properties.tipo == "Homicidio") {
+		layer.options.icon = L.icon({
+			iconUrl: "/mapa-crime-sp/img/homicidio.png",
+			iconSize: [28, 45]
+		});
+	} else if(feature.properties.tipo == "Furto de Celular") {
+		layer.options.icon = L.icon({
+			iconUrl: "/mapa-crime-sp/img/furto.png",
+			iconSize: [28, 45]
+		});
+	}
 
-	if(overlayMaps.hasOwnProperty(feature.properties.tipo)){
+	if (overlayMaps.hasOwnProperty(feature.properties.tipo)) {
 		overlayMaps[feature.properties.tipo].addLayer(layer);
-	}else{
+	} else {
 		overlayMaps[feature.properties.tipo] = L.layerGroup(layer);
 	}
 }
 
 var points = omnivore.csv("/mapa-crime-sp/data/massa.csv").on('ready', function () {
-	points.eachLayer(eachLayer);-
-	L.control.layers(null,overlayMaps).addTo(mymap);
+	points.eachLayer(eachLayer);
+	L.control.layers(null, overlayMaps).addTo(mymap);
 });
