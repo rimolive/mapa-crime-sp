@@ -1,12 +1,9 @@
-name: Aprendendo Cloud Computing
-description: A jekyll theme
-
+name: Mapa da Criminalidade de São Paulo
+description: Uma análise dos dados da SSP de crimes no Estado de SP
 url: https://rimolive.github.io/mapa-crime-sp
 
 baseurl: /mapa-crime-sp
-
 github: 'rimolive/mapa-crime-sp'
-
 markdown: kramdown
 
 exclude:
@@ -14,10 +11,7 @@ exclude:
   - CONTRIBUTING.md
 
 collections:
-  faqs: {}
   scripts: {}
-  applications:
-    output: true
 
 defaults:
 - scope:
