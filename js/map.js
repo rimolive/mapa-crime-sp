@@ -36,6 +36,12 @@ function eachLayer(layer) {
 			iconSize: [28, 45]
 		});
 		furtosCelular.addLayer(layer);
+	} else if(feature.properties.tipo == "Roubo de Veiculo") {
+		layer.options.icon = L.icon({
+			iconUrl: "/mapa-crime-sp/img/furtoveiculo.png",
+			iconSize: [28, 45]
+		});
+		furtosCelular.addLayer(layer);
 	}
 }
 
