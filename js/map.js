@@ -6,6 +6,7 @@ var mymap = L.map('mapid', {
 var overlayMaps = {};
 var homicidios = L.markerClusterGroup();
 var furtosCelular = L.markerClusterGroup();
+var roubosVeiculo = L.markerClusterGroup();
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 	maxZoom: 18,
@@ -41,7 +42,7 @@ function eachLayer(layer) {
 			iconUrl: "/mapa-crime-sp/img/furtoveiculo.png",
 			iconSize: [28, 45]
 		});
-		furtosCelular.addLayer(layer);
+		roubosVeiculo.addLayer(layer);
 	}
 }
 
@@ -49,5 +50,6 @@ var points = omnivore.csv("/mapa-crime-sp/data/massa.csv").on('ready', function 
 	points.eachLayer(eachLayer);
 	overlayMaps["Homicidio"] = homicidios;
 	overlayMaps["Furto de Celular"] = furtosCelular;
+	overlayMaps["Roubo de Veiculo"] = roubosVeiculo
 	L.control.layers(null, overlayMaps).addTo(mymap);
 });
