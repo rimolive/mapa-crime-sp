@@ -1,6 +1,8 @@
 mapacrimesp:
   - title: Mapa
-    url: /mapa-crime-sp
+    url: /mapa-crime-sp/
+  - title: Análise
+    url: analise
   - title: Desenvolvedor
     url: desenvolvedor
   - title: Sobre

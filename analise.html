@@ -1,0 +1,118 @@
+---
+layout: default
+title: Análise dos dados de criminalidade na cidade de São Paulo
+---
+<style> /* set the CSS */
+	.bar { fill: steelblue; }
+</style>
+<div class="container-fluid">
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-sm-6 col-xs-12"></div>
+			<div class="col-sm-8 col-xs-12">
+				<h2><b>Período do dia que ocorreram os crimes</b></h2>
+				<svg width="576" height="300" id="periodo"></svg>
+			</div>
+			<div class="col-sm-8 col-xs-12">
+				<h2><b>Furto de veículos - Tipos de veículos</b></h2>
+				<svg width="576" height="300" id="furto_veiculo"></svg>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+
+	var svg = d3.select("svg#periodo"),
+		margin = { top: 30, right: 20, bottom: 30, left: 50 },
+		width = +svg.attr("width") - margin.left - margin.right,
+		height = +svg.attr("height") - margin.top - margin.bottom,
+		g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	var svgVeiculo = d3.select("svg#furto_veiculo"),
+		margin = { top: 30, right: 20, bottom: 30, left: 50 },
+		width = +svg.attr("width") - margin.left - margin.right,
+		height = +svg.attr("height") - margin.top - margin.bottom,
+		g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	var x = d3.scaleBand()
+		.range([40, width])
+		.padding(0.1);
+
+	var y = d3.scaleLinear()
+		.range([height, 0]);
+
+	var yLog = d3.scaleLog()
+		.range([height,0]);
+
+	d3.csv("data/homicidio.csv", function (d) {
+		d.quantidade = +d.quantidade;
+		return d;
+	}, function (error, data) {
+		if (error) throw error;
+
+		// Scale the range of the data in the domains
+		x.domain(data.map(function(d) { return d.periodo; }));
+		y.domain([0, d3.max(data, function(d) { return d.quantidade + 60; })]);
+
+		svg.selectAll("#periodo.bar")
+			.data(data)
+			.enter().append("rect")
+			.attr("class", "bar")
+			.attr("x", function(d) { return x(d.periodo); })
+			.attr("width", x.bandwidth())
+			.attr("y", function(d) { return y(d.quantidade); })
+			.attr("height", function(d) { return height - y(d.quantidade); });
+
+		// add the x Axis
+		svg.append("g")
+			.attr("transform", "translate(0," + height + ")")
+			.call(d3.axisBottom(x));
+
+		// add the y Axis
+		svg.append("g")
+			.attr("transform", "translate(40, 0)")
+			.call(d3.axisLeft(y));
+	});
+
+	d3.csv("data/furto-veiculo.csv", function(d) {
+		d.quantidade = +d.quantidade;
+		return d;
+	}, function (error, data) {
+		if (error) throw error;
+
+		// Scale the range of the data in the domains
+		x.domain(data.map(function(d) { return d.tipo_veiculo; }));
+		//yLog.domain([0, d3.max(data, function(d) { return d.quantidade + 60; })]);
+		y.domain([0, d3.max(data, function(d) { return d.quantidade + 60; })]);
+
+		svgVeiculo.selectAll("#furto_veiculo.bar")
+			.data(data)
+			.enter().append("rect")
+			.attr("class", "bar")
+			.attr("x", function(d) { return x(d.tipo_veiculo); })
+			.attr("width", x.bandwidth())
+			//.attr("y", function(d) { return yLog(d.quantidade); })
+			.attr("y", function(d) { return y(d.quantidade); })
+			//.attr("height", function(d) { return height - yLog(d.quantidade); });
+			.attr("height", function(d) { return height - y(d.quantidade); });
+
+		// add the x Axis
+		svgVeiculo.append("g")
+			.attr("transform", "translate(0," + height + ")")
+			.call(d3.axisBottom(x))
+			.selectAll("text")
+			.style("text-anchor", "end")
+			.attr("dx", "-.8em")
+			.attr("dy", ".15em")
+			.attr("transform", "rotate(-35)");
+
+		// add the y Axis
+		//svgVeiculo.append("g")
+		//	.attr("transform", "translate(40, 0)")
+		//	.call(d3.axisLeft(yLog));
+		
+		svgVeiculo.append("g")
+			.attr("transform", "translate(40, 0)")
+			.call(yAxis);
+	});
+</script>
