@@ -5,4 +5,6 @@ labels:
 - Scrapy
 ---
 
-Esse script é um esboço de um spider usando a biblioteca [Scrapy](https://scrapy.org/). Ele ainda está em fase de desenvolvimento.
+Esse script é um spider escrito em Python e utilizando a biblioteca
+ [Scrapy](https://scrapy.org/). Nele, é possível capturar todas as 
+ informações do site da SSP em formato excel (.xls).

@@ -8,12 +8,12 @@ title: Análise dos dados de criminalidade na cidade de São Paulo
 <div class="container-fluid">
 	<div class="jumbotron">
 		<div class="row">
-			<div class="col-sm-6 col-xs-12"></div>
-			<div class="col-sm-8 col-xs-12">
+			<!-- <div class="col-sm-6 col-xs-12"></div> -->
+			<div class="col-sm-8 col-xs-6">
 				<h2><b>Período do dia que ocorreram os crimes</b></h2>
 				<svg width="576" height="300" id="periodo"></svg>
 			</div>
-			<div class="col-sm-8 col-xs-12">
+			<div class="col-sm-8 col-xs-6">
 				<h2><b>Furto de veículos - Tipos de veículos</b></h2>
 				<svg width="576" height="300" id="furto_veiculo"></svg>
 			</div>
@@ -82,8 +82,7 @@ title: Análise dos dados de criminalidade na cidade de São Paulo
 
 		// Scale the range of the data in the domains
 		x.domain(data.map(function(d) { return d.tipo_veiculo; }));
-		//yLog.domain([0, d3.max(data, function(d) { return d.quantidade + 60; })]);
-		y.domain([0, d3.max(data, function(d) { return d.quantidade + 60; })]);
+		yLog.domain([0, d3.max(data, function(d) { return d.quantidade + 60; })]);
 
 		svgVeiculo.selectAll("#furto_veiculo.bar")
 			.data(data)
@@ -91,11 +90,9 @@ title: Análise dos dados de criminalidade na cidade de São Paulo
 			.attr("class", "bar")
 			.attr("x", function(d) { return x(d.tipo_veiculo); })
 			.attr("width", x.bandwidth())
-			//.attr("y", function(d) { return yLog(d.quantidade); })
-			.attr("y", function(d) { return y(d.quantidade); })
-			//.attr("height", function(d) { return height - yLog(d.quantidade); });
-			.attr("height", function(d) { return height - y(d.quantidade); });
-
+			.attr("y", function(d) { return yLog(d.quantidade); })
+			.attr("height", function(d) { return height - yLog(d.quantidade); });
+			
 		// add the x Axis
 		svgVeiculo.append("g")
 			.attr("transform", "translate(0," + height + ")")
@@ -111,8 +108,5 @@ title: Análise dos dados de criminalidade na cidade de São Paulo
 		//	.attr("transform", "translate(40, 0)")
 		//	.call(d3.axisLeft(yLog));
 		
-		svgVeiculo.append("g")
-			.attr("transform", "translate(40, 0)")
-			.call(yAxis);
 	});
 </script>
