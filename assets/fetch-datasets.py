@@ -16,7 +16,7 @@ HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36'
 }
 
-BASE_PATH = "" # Preencha esse valor com um caminho para gravar os arquivos xls.
+BASE_PATH = "/run/media/rmartine/TOSHIBA EXT/big-data-projects/ssp" # Preencha esse valor com um caminho para gravar os arquivos xls.
 
 class SegurancaPublicaSpider(Spider):
     name = 'ssp spider'
@@ -24,13 +24,13 @@ class SegurancaPublicaSpider(Spider):
     crimes = [
         'FurtoCelular'
         'FurtoVeiculo',
-        'Homicicio'
-        'Latrocinio',
-        'LesaoMorte',
-        'MortePolicial',
-        'MorteSuspeita',
-        'RouboCelular',
-        'RouboVeiculo'
+        #'Homicicio'
+        #'Latrocinio',
+        #'LesaoMorte',
+        #'MortePolicial',
+        #'MorteSuspeita',
+        #'RouboCelular',
+        #'RouboVeiculo'
     ]
     download_delay = 1.5
     download_timeout = 1080
@@ -110,7 +110,7 @@ class SegurancaPublicaSpider(Spider):
         crime = response.meta.get('crime')
         year = format(int(response.meta.get('year')), '02d')
         month = format(int(response.meta.get('month')), '02d')
-        filename = "{}/data/20{}/{}_20{}_{}.xls".format(BASE_PATH, year, crime, year, month)
+        filename = "{}/raw/20{}/{}_20{}_{}.xls".format(BASE_PATH, year, crime, year, month)
         print("Writing file {} now!".format(filename))
         with open(filename, 'w+') as csv_file:
             csv_file.write(response.body)

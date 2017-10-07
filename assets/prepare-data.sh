@@ -14,7 +14,7 @@ declare -a crimes=(
 	'Latrocinio'
 	'LesaoMorte'
 	'MortePolicial'
-	'MorteSuspeita'
+	#'MorteSuspeita'
 	'RouboCelular'
 	'RouboVeiculo'
 );
@@ -39,24 +39,25 @@ declare -a years=(
 
 for crime in ${crimes[@]}; do
 	for year in ${years[@]}; do
-		pushd data/$year > /dev/null
+		pushd raw/$year > /dev/null
 		for month in `ls $crime\_* | tr '_' ' ' | tr '.' ' ' | awk '{print $3}'`; do
 
-			if [ ! -d "../../database/$year" ]; then
-				mkdir -p ../../database/$year
+			if [ ! -d "../../wrangled/$year" ]; then
+				mkdir -p ../../wrangled/$year
 			fi
 
 			lcrime=$(echo $crime | tr '[:upper:]' '[:lower:]')
 
-			cp -v $crime\_$year\_$month.xls ../../database/$year/$lcrime\_$year\_$month.tsv
+			cp -v $crime\_$year\_$month.xls ../../wrangled/$year/$lcrime\_$year\_$month.tsv
 
-			pushd ../../database/$year > /dev/null
+			pushd ../../wrangled/$year > /dev/null
 			sed -i 's/\x00//g' $lcrime\_$year\_$month.tsv
 			sed -i 's/,//g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xc7/C/g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xfa/u/g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xed/i/g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xf7/o/g' $lcrime\_$year\_$month.tsv
+			sed -i 's/\xf4/o/g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xe3/a/g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xc3/A/g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xc1/A/g' $lcrime\_$year\_$month.tsv
@@ -76,6 +77,7 @@ for crime in ${crimes[@]}; do
 			sed -i 's/\xe7/c/g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xa7/par. /g' $lcrime\_$year\_$month.tsv
 			sed -i 's/\xba/o./g' $lcrime\_$year\_$month.tsv
+			sed -i 's/\"//g' $lcrime\_$year\_$month.tsv
 			cat $lcrime\_$year\_$month.tsv | tr '\t' ',' >  $lcrime\_$year\_$month.csv
 			rm -rf $lcrime\_$year\_$month.tsv
 			popd > /dev/null
