@@ -12,6 +12,7 @@ exclude:
 
 collections:
   scripts: {}
+  reports: {}
 
 defaults:
 - scope:

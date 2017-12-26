@@ -1,4 +1,11 @@
+html, body {
+	height: 100%;
+}
+
 body {
 	align-content: center;
-	
+}
+
+div.row#whole_page {
+	height: 100%
 }

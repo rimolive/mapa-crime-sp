@@ -1,0 +1,22 @@
+---
+layout: default
+title: Relatórios dos dados de criminalidade no Estado de São Paulo
+---
+
+<div id="whole_page" class="row">
+    <div class="col-lg-1" style="height: 80%;">
+        <ul>
+            {% for report in site.data.reports %}
+            <li>
+                <h2>
+                    <a href="./report/{{ report.file }}" target="report_viewer">{{ report.year }}</a>
+                </h2>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-lg-11" style="height: 80%;">
+        <iframe name="report_viewer" width="100%" height="100%" style="border: none; overflow: hidden;">
+        </iframe>
+    </div>
+</div>
