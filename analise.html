@@ -44,7 +44,7 @@ title: Análise dos dados de criminalidade na cidade de São Paulo
 	var yLog = d3.scaleLog()
 		.range([height,0]);
 
-	d3.csv("data/homicidio.csv", function (d) {
+	d3.csv("./data/homicidio.csv", function (d) {
 		d.quantidade = +d.quantidade;
 		return d;
 	}, function (error, data) {
@@ -74,7 +74,7 @@ title: Análise dos dados de criminalidade na cidade de São Paulo
 			.call(d3.axisLeft(y));
 	});
 
-	d3.csv("data/furto-veiculo.csv", function(d) {
+	d3.csv("./data/furto-veiculo.csv", function(d) {
 		d.quantidade = +d.quantidade;
 		return d;
 	}, function (error, data) {
@@ -104,9 +104,9 @@ title: Análise dos dados de criminalidade na cidade de São Paulo
 			.attr("transform", "rotate(-35)");
 
 		// add the y Axis
-		//svgVeiculo.append("g")
-		//	.attr("transform", "translate(40, 0)")
-		//	.call(d3.axisLeft(yLog));
+		svgVeiculo.append("g")
+			.attr("transform", "translate(40, 0)")
+			.call(d3.axisLeft(yLog));
 		
 	});
 </script>
