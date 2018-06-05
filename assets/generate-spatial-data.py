@@ -1,20 +1,22 @@
+# -*- coding: utf-8 -*-
+import numpy
 import pandas
 import requests
 import json
 import googlemaps
 import math
 
-GMAPS_API_KEY = '' # Preencha aqui a API Key do Google Maps.
+GMAPS_API_KEY = 'AIzaSyDeiNs76nsPzEwCbl5l9wbypWEWqTE2HV4'
 
 gmaps = googlemaps.Client(key=GMAPS_API_KEY)
 # GMaps API Docs:
 # https://developers.google.com/maps/documentation/javascript/marker-clustering
 
-YEAR = "2003"
-MONTH = "12"
-CRIME = "latrocinio"
+YEAR = "2005"
+MONTH = "01"
+CRIME = "furtoveiculo"
 BASE_PATH = "/run/media/rmartine/TOSHIBA EXT/big-data-projects/ssp/wrangled"
-SPATIAL_PATH = "/run/media/rmartine/TOSHIBA EXT/big-data-projects/ssp/spatial/"
+SPATIAL_PATH = "/run/media/rmartine/TOSHIBA EXT/big-data-projects/ssp/spatial"
 FILE = "{}_{}_{}.csv"
 LOCATION = ""
 
@@ -37,9 +39,16 @@ def filtra_dados_cidade(raw_path, crime, year=0):
             gera_arquivo_coordenadas(dados, raw_path, crime, YEAR, smonth)
 
 def gera_arquivo_coordenadas(dados, path, crime, year, month):
+    dados['ENDERECOCOMPLETO'] = ""
     if len(LOCATION) > 0:
         dados = dados[dados['CIDADE'] == LOCATION]
-    dados['ENDERECOCOMPLETO'] = dados['LOGRADOURO'] + ", " + dados['NUMERO'].apply(str) + " " + dados['BAIRRO'] + " - " + dados['CEP'].apply(str) + " " + dados['CIDADE'] + " " + dados['UF']
+    dados['ENDERECOCOMPLETO']+=dados['LOGRADOURO']
+    dados['ENDERECOCOMPLETO']+=dados['NUMERO'].apply(lambda x: str(", " + str(int(x))) if not numpy.isnan(x) else "")
+    dados['ENDERECOCOMPLETO']+=dados['BAIRRO'].apply(lambda x: str(" " + x) if not x else "")
+    dados['ENDERECOCOMPLETO']+=dados['CEP'].apply(lambda x: str(" - " + str(int(x))) if not x else "")
+    dados['ENDERECOCOMPLETO']+=" " + dados['CIDADE']
+    dados['ENDERECOCOMPLETO']+=" " + dados['UF']
+
     dados['COORDENADAS'] = dados['ENDERECOCOMPLETO'].apply(recupera_coordenadas_mapa)
 
     spatial_location = "{}/{}/".format(SPATIAL_PATH, year)
