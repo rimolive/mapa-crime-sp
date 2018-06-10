@@ -6,15 +6,15 @@ import json
 import googlemaps
 import math
 
-GMAPS_API_KEY = 'AIzaSyDeiNs76nsPzEwCbl5l9wbypWEWqTE2HV4'
+GMAPS_API_KEY = '' # <-- Adicione sua chave da API do Google Maps
 
 gmaps = googlemaps.Client(key=GMAPS_API_KEY)
 # GMaps API Docs:
 # https://developers.google.com/maps/documentation/javascript/marker-clustering
 
-YEAR = "2005"
-MONTH = "01"
-CRIME = "furtoveiculo"
+YEAR = ""
+MONTH = ""
+CRIME = ""
 BASE_PATH = "/run/media/rmartine/TOSHIBA EXT/big-data-projects/ssp/wrangled"
 SPATIAL_PATH = "/run/media/rmartine/TOSHIBA EXT/big-data-projects/ssp/spatial"
 FILE = "{}_{}_{}.csv"
